@@ -5,7 +5,10 @@
 /.pnp
 .pnp.js
 .git
-package-*.json
+
+# lock files
+package-lock.json
+yarn.lock
 
 # testing
 /coverage
