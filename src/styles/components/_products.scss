@@ -1,0 +1,30 @@
+.products__list {
+  padding: 2rem;
+  inline-size: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 15px;
+  align-items: flex-start;
+}
+
+.products__item {
+  width: 11em;
+  img {
+    width: 11em;
+  }
+}
+
+.products__number {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
+  button {
+    color: white;
+  }
+  p {
+    font-size: 2em;
+    margin: 0;
+  }
+}

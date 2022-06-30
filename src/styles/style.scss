@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+
+@import url("./components/_products.scss");
+@import url("./components/_navbar.scss");
+@import url("./components/_login.scss");
+
+.App {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgb(18, 31, 61);
+  color: rgb(226, 229, 233);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center !important;
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  background: rgb(18, 31, 61) !important;
+  color: rgb(226, 229, 233) !important;
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
+
+p {
+  line-height: 1.65em;
+  color: rgb(197, 203, 211);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+h5 {
+  font-size: 1rem;
+}
