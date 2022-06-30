@@ -17,7 +17,6 @@ function App() {
   const [auth, setAuth] = useState(false);
   // const [users, setUsers] = useState([{ username: "sla686", password: "123" }]);
   const [authUser, setAuthUser] = useState("");
-  const [page, setPage] = useState(0);
 
   const dispatch = useAppDispatch();
 
