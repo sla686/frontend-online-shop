@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAppDispatch } from "./hooks";
+import { createTheme } from "@mui/material";
+import { deepOrange, grey, orange, yellow } from "@mui/material/colors";
 
 import "../styles/style.scss";
-
+import { useAppDispatch, useAppSelector } from "./hooks";
 import Cart from "../components/Cart";
 import HomePage from "../components/HomePage";
 import Products from "../components/Products";
@@ -12,17 +13,45 @@ import Navigation from "../components/Navigation";
 import Login from "../components/Login";
 import RequireAuth from "../helpers/RequireAuth";
 import { fetchProducts } from "../features/products/productsSlice";
+import SingleProduct from "../components/SingleProduct";
 
 function App() {
   const [auth, setAuth] = useState(false);
-  // const [users, setUsers] = useState([{ username: "sla686", password: "123" }]);
-  const [authUser, setAuthUser] = useState("");
+  const [mode, setMode] = useState<"dark" | "light">("dark");
+
+  const currentUser = useAppSelector((state) => state.users.currentUser);
+
+  const theme = createTheme({
+    palette: {
+      mode,
+      ...(mode === "light"
+        ? {
+            primary: yellow,
+            text: {
+              primary: grey[900],
+              secondary: grey[500],
+            },
+          }
+        : {
+            primary: orange,
+            text: {
+              primary: deepOrange[900],
+              secondary: deepOrange[500],
+            },
+          }),
+    },
+  });
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchProducts({ offset: 0, limit: 10 }));
-  });
+  }, []);
+
+  useEffect(() => {
+    if (currentUser) setAuth(true);
+    else setAuth(false);
+  }, [currentUser]);
 
   // @ts-ignore
   // const AuthWrapper = () => {
@@ -38,32 +67,19 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<HomePage />} />
-          <Route path="products" element={<Products />} />
+          <Route path="products">
+            <Route index element={<Products />} />
+            <Route path=":productId" element={<SingleProduct />} />
+          </Route>
           <Route
             path="profile"
             element={
               <RequireAuth authenticated={auth}>
-                <Profile
-                  user={authUser}
-                  unAuth={() => {
-                    setAuth(false);
-                    setAuthUser("");
-                  }}
-                />
+                <Profile />
               </RequireAuth>
             }
           />
-          <Route
-            path="login"
-            element={
-              <Login
-                authorize={(user: string) => {
-                  setAuth(true);
-                  setAuthUser(user);
-                }}
-              />
-            }
-          />
+          <Route path="login" element={<Login />} />
           <Route path="cart" element={<Cart />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>

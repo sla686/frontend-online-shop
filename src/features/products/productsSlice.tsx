@@ -1,27 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { ProductsOnPage, ProductState } from "../../types/products";
+import { ProductsOnPage, Product } from "../../types/products";
 
-const initialState: ProductState[] = [];
-// const initialState: Array<ProductState> = [
-//   {
-//     id: 2,
-//     title: "Generic Cotton Table",
-//     price: 714,
-//     description:
-//       "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-//     category: {
-//       id: 4,
-//       name: "Shoes",
-//       image: "https://api.lorem.space/image/shoes?w=640&h=480&r=4094",
-//     },
-//     images: [
-//       "https://api.lorem.space/image/shoes?w=640&h=480&r=732",
-//       "https://api.lorem.space/image/shoes?w=640&h=480&r=7233",
-//       "https://api.lorem.space/image/shoes?w=640&h=480&r=2254",
-//     ],
-//   },
-// ];
+const initialState: Product[] = [];
 
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",

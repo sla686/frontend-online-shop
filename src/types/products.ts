@@ -3,11 +3,21 @@ export interface ProductsOnPage {
   limit: number;
 }
 
-export interface ProductState {
+export interface Product {
   id: number;
   title: string;
   price: number;
   description: string;
-  category: object;
+  category: Category;
   images: string[];
+}
+
+export interface ProductInCart extends Product {
+  quantity: number;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  image: string;
 }

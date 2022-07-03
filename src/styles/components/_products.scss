@@ -4,10 +4,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 15px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .products__item {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(163, 163, 163, 0.5);
+  }
   width: 11em;
   img {
     width: 11em;
@@ -19,7 +23,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2em;
+  // margin-bottom: 2em;
   button {
     color: white;
   }

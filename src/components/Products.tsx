@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
@@ -12,6 +13,7 @@ const Product = () => {
   const productsList = useAppSelector((state: RootState) => state.products);
   const [page, setPage] = useState(1);
 
+  const navigate = useNavigate();
   const limit = 10;
 
   const onChangePage = (input: "left" | "right") => {
@@ -36,16 +38,6 @@ const Product = () => {
   return (
     <>
       <h2>List of products:</h2>
-      <div className="products__list">
-        {/* @ts-ignore */}
-        {productsList.map((item) => (
-          <div key={item.id} className="products__item">
-            <img src={item.images[0]} alt="" />
-            <h5>{item.title}</h5>
-            <p>{item.price}$</p>
-          </div>
-        ))}
-      </div>
       <div className="products__number">
         <IconButton
           aria-label="go to the previous page"
@@ -62,6 +54,20 @@ const Product = () => {
         >
           <ChevronRight fontSize="large" />
         </IconButton>
+      </div>
+      <div className="products__list">
+        {/* @ts-ignore */}
+        {productsList.map((item) => (
+          <div
+            key={item.id}
+            className="products__item"
+            onClick={() => navigate(`${item.id}`)}
+          >
+            <img src={item.images[0]} alt="product" />
+            <h5>{item.title}</h5>
+            <p>{item.price}$</p>
+          </div>
+        ))}
       </div>
     </>
   );

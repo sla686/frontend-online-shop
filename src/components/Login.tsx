@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -10,40 +9,51 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { loginByToken, login } from "../features/users/usersSlice";
 
 const theme = createTheme();
 
 //@ts-ignore
-export default function Login({ authorize }) {
+export default function Login() {
   const [auth, setAuth] = useState(false);
   const [tryAgain, setTryAgain] = useState(false);
 
-  //@ts-ignore
-  const users = useSelector((state) => state.users);
+  const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((state) => state.users.currentUser);
+
+  const token = localStorage.getItem("access_token");
+
+  useEffect(() => {
+    // Checking if we are logged in
+    if (currentUser) {
+      setTryAgain(false);
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, [currentUser]);
+
+  if (!currentUser && token) {
+    // If we have a token we can easily log in automatically
+    dispatch(loginByToken(token));
+  }
 
   //@ts-ignore
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
-    //@ts-ignore
-    users.forEach((el) => {
-      if (
-        data.get("username") === el.username &&
-        data.get("password") === el.password
-      ) {
-        console.log("authorized!");
-        setAuth(true);
-        console.log(el.username);
-        setTryAgain(false);
-        authorize(el.username);
-      } else {
-        setTryAgain(true);
-      }
-    });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+    dispatch(
+      //@ts-ignore
+      login({ email: data.get("email"), password: data.get("password") })
+    );
+
+    // If the store is still empty then it means we typed incorrect credentials. However it's a sync operation relying on the async info :(
+    if (!currentUser) setTryAgain(true);
   };
 
   return (
@@ -76,10 +86,10 @@ export default function Login({ authorize }) {
                 margin="normal"
                 required
                 fullWidth
-                label="Username"
-                name="username"
-                type="text"
-                autoComplete="username"
+                label="Email"
+                name="email"
+                type="email"
+                autoComplete="email"
                 autoFocus
                 variant="filled"
               />
