@@ -1,33 +1,32 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { Product } from "../types/products";
+import imageNotFound from "../images/imageNotFound.png";
+import useProduct from "../features/products/useProduct";
 
 const SingleProduct = () => {
-  const [product, setProduct] = useState<Product | undefined>(undefined);
   const { productId } = useParams();
-  //@ts-ignore
-  // const products = useSelector((state) => state.products);
-  // //@ts-ignore
-  // setProduct(products.filter((product) => product.id === productId)[0]);
+  const product = useProduct(productId);
 
-  useEffect(() => {
-    fetch(`https://api.escuelajs.co/api/v1/products/${productId}`)
-      .then((data) => data.json())
-      .then((data) => setProduct(data));
-  }, [productId]);
+  // const dispatch = useAppDispatch();
 
   return (
     <div>
       {product ? (
-        <div>
-          <img src={product.images[0]} alt="product" />
-          <h5>{product.title}</h5>
-          <p>{product.price}$</p>
+        <div className="singleProduct">
+          <img
+            src={product?.images?.[0]}
+            //@ts-ignore
+            onError={(e) => (e.target.src = imageNotFound)}
+            alt="product"
+          />
+          <h5>{product?.title}</h5>
+          <p>{product?.price}$</p>
         </div>
       ) : (
-        <div>The product does not exist!</div>
+        <div>
+          The product does not exist or it's unavailable to recieve the
+          product's information!
+        </div>
       )}
     </div>
   );

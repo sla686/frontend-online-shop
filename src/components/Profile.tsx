@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -11,9 +11,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
   fetchAllUsers,
-  logout,
+  logoutUsers,
   createUser,
 } from "../features/users/usersSlice";
+import { logoutCurUser } from "../features/users/currentUserSlice";
 import avatarNotFound from "../images/imageNotFound.png";
 import { User } from "../types/user";
 import { nanoid } from "@reduxjs/toolkit";
@@ -23,15 +24,18 @@ const theme = createTheme();
 const Profile = () => {
   const [showAllUsers, setShowAllUsers] = useState(false);
   const [userExist, setUserExist] = useState(false);
-  const currentUser = useAppSelector((state) => state.users.currentUser);
+  const currentUser = useAppSelector((state) => state.currentUser.currentUser);
   const allUsers = useAppSelector((state) => state.users.userList);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("Use current user check");
     if (currentUser) dispatch(fetchAllUsers(currentUser));
   }, []);
 
   useEffect(() => {
+    console.log("Use effect all users");
     if (allUsers.length) setShowAllUsers(true);
     else setShowAllUsers(false);
   }, [allUsers]);
@@ -48,6 +52,7 @@ const Profile = () => {
       avatar: data.get("avatar"),
     });
 
+    //@ts-ignore
     allUsers.forEach((user) => {
       user.email === data.get("email")
         ? setUserExist(true)
@@ -73,28 +78,31 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="profile">
       <Link
         to="/login"
         onClick={() => {
-          dispatch(logout({}));
+          dispatch(logoutUsers({}));
+          dispatch(logoutCurUser({}));
           // We will remove the token so that we won't be automatically logged in back
           localStorage.removeItem("access_token");
         }}
       >
         Sign out
       </Link>
-      <h2>Hello, {currentUser?.name}!</h2>
-      <img
-        src={currentUser?.avatar}
-        onError={(e) => {
-          //@ts-ignore
-          e.target.src = avatarNotFound;
-        }}
-        alt="avatar"
-      />
-      <h2>Your email: {currentUser?.email}</h2>
-      <h2>Your current role: {currentUser?.role}</h2>
+      <div className="users__user users__profile">
+        <img
+          src={currentUser?.avatar}
+          onError={(e) => {
+            //@ts-ignore
+            e.target.src = avatarNotFound;
+          }}
+          alt="avatar"
+        />
+        <h2>Hello, {currentUser?.name}!</h2>
+        <h2>Your email: {currentUser?.email}</h2>
+        <h2>Your current role: {currentUser?.role}</h2>
+      </div>
       {currentUser?.role === "admin" && (
         <div>
           <p>
@@ -111,7 +119,11 @@ const Profile = () => {
               {showAllUsers &&
                 allUsers.map((user: User) => {
                   return (
-                    <div key={user.id} className="users__user">
+                    <div
+                      key={user.id}
+                      className="users__user"
+                      onClick={() => navigate(`/users/${user.id}`)}
+                    >
                       <img
                         src={user.avatar}
                         onError={(e) => {

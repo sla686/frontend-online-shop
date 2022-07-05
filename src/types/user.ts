@@ -9,7 +9,6 @@ export interface User {
 
 export interface UserReducerState {
   userList: User[];
-  currentUser: User | undefined;
 }
 
 export interface LoginType {

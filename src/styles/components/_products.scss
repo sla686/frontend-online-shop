@@ -8,12 +8,17 @@
 }
 
 .products__item {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   &:hover {
     background-color: rgba(163, 163, 163, 0.5);
   }
   width: 11em;
   img {
+    border-radius: 10px;
     width: 11em;
   }
 }
@@ -30,5 +35,12 @@
   p {
     font-size: 2em;
     margin: 0;
+  }
+}
+
+.singleProduct {
+  img {
+    border-radius: 10px;
+    width: 20em;
   }
 }

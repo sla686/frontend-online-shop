@@ -1,9 +1,9 @@
 # Front-end Project
 
-## Requirement
+## Requirements
 1. TypeScript and Unit testing are required in your project
 2. Use the API endpoint [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/). Read the documentation and learn how to use the different endpoints.
-3. Create at lease 4 pages (can be more if you want): Home page, product page, 
+3. Create at least 4 pages (can be more if you want): Home page, product page, 
 profile page (only available if user logins), and cart page (cart could be a page or a modal)
 4. Use context API to create a button to switch themes of the web app
 5. Create Redux store for following features:

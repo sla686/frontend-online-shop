@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { loginByToken, login } from "../features/users/usersSlice";
+import { loginByToken, login } from "../features/users/currentUserSlice";
 
 const theme = createTheme();
 
@@ -20,7 +20,7 @@ export default function Login() {
   const [tryAgain, setTryAgain] = useState(false);
 
   const dispatch = useAppDispatch();
-  const currentUser = useAppSelector((state) => state.users.currentUser);
+  const currentUser = useAppSelector((state) => state.currentUser.currentUser);
 
   const token = localStorage.getItem("access_token");
 
@@ -59,6 +59,10 @@ export default function Login() {
   return (
     <div className="login">
       {auth && <Navigate to="/profile" replace />}
+      <h3>
+        Authentication required to get access to your user profile as well as to
+        get access for additional options (if you are an admin)
+      </h3>
       {tryAgain && <h3>Incorrect username or password!</h3>}
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">

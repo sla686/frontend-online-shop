@@ -14,16 +14,54 @@
 }
 
 .users__user {
-  // cursor: pointer;
-  // &:hover {
-  //   background-color: rgba(163, 163, 163, 0.5);
-  // }
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(163, 163, 163, 0.5);
+  }
   margin: 0.25em;
   width: 12em;
   img {
     width: 12em;
+    border-radius: 10px;
   }
   p {
     margin: 0.5em 0;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .users__profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: auto;
+    align-items: center;
+    justify-items: center;
+    img {
+      grid-row: 1 / span 3;
+      width: 15em;
+    }
+    cursor: initial;
+    &:hover {
+      background-color: initial;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: yellow;
+    font-size: 1.5em;
+    font-weight: 400;
+    &:hover {
+      color: darkred;
+      text-decoration: underline;
+    }
+    &:active {
+      color: aquamarine;
+      text-decoration: underline;
+    }
   }
 }

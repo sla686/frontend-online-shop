@@ -14,12 +14,13 @@ import Login from "../components/Login";
 import RequireAuth from "../helpers/RequireAuth";
 import { fetchProducts } from "../features/products/productsSlice";
 import SingleProduct from "../components/SingleProduct";
+import SingleUser from "../components/SingleUser";
 
 function App() {
   const [auth, setAuth] = useState(false);
   const [mode, setMode] = useState<"dark" | "light">("dark");
 
-  const currentUser = useAppSelector((state) => state.users.currentUser);
+  const currentUser = useAppSelector((state) => state.currentUser.currentUser);
 
   const theme = createTheme({
     palette: {
@@ -70,6 +71,16 @@ function App() {
           <Route path="products">
             <Route index element={<Products />} />
             <Route path=":productId" element={<SingleProduct />} />
+          </Route>
+          <Route path="users">
+            <Route
+              path=":userId"
+              element={
+                <RequireAuth authenticated={auth}>
+                  <SingleUser />
+                </RequireAuth>
+              }
+            />
           </Route>
           <Route
             path="profile"
