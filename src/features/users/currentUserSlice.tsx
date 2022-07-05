@@ -20,7 +20,7 @@ export const login = createAsyncThunk(
       );
       if (response.data.access_token) {
         // we need to save our access token in local storage!!
-        localStorage.setItem("access_token", response.data.access_token);
+        // localStorage.setItem("access_token", response.data.access_token);
         const getUser = await axios.get(
           "https://api.escuelajs.co/api/v1/auth/profile",
           {
@@ -33,7 +33,7 @@ export const login = createAsyncThunk(
       }
       return undefined;
     } catch (err) {
-      localStorage.removeItem("access_token");
+      localStorage.removeItem("current_user");
       console.log(err);
     }
   }
@@ -54,7 +54,7 @@ export const loginByToken = createAsyncThunk(
       );
       return getUser.data;
     } catch (err) {
-      localStorage.removeItem("access_token");
+      localStorage.removeItem("current_user");
       console.log(err);
     }
   }

@@ -22,7 +22,7 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.currentUser.currentUser);
 
-  const token = localStorage.getItem("access_token");
+  // const token = localStorage.getItem("current_user");
 
   useEffect(() => {
     // Checking if we are logged in
@@ -34,10 +34,10 @@ export default function Login() {
     }
   }, [currentUser]);
 
-  if (!currentUser && token) {
-    // If we have a token we can easily log in automatically
-    dispatch(loginByToken(token));
-  }
+  // if (!currentUser && token) {
+  //   // If we have a token we can easily log in automatically
+  //   dispatch(loginByToken(token));
+  // }
 
   //@ts-ignore
   const handleSubmit = (event) => {

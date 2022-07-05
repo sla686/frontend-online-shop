@@ -85,7 +85,7 @@ const Profile = () => {
           dispatch(logoutUsers({}));
           dispatch(logoutCurUser({}));
           // We will remove the token so that we won't be automatically logged in back
-          localStorage.removeItem("access_token");
+          // localStorage.removeItem("current_user");
         }}
       >
         Sign out

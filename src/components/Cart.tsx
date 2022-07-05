@@ -82,6 +82,15 @@ const Cart = () => {
                 </button>
               </div>
             ))}
+            <div>
+              <h2>
+                Total price is{" "}
+                {cartList
+                  .map((el) => el.price * el.quantity)
+                  .reduce((prev, cur) => prev + cur, 0)}
+                $
+              </h2>
+            </div>
           </div>
         </div>
       ) : (
