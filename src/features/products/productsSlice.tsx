@@ -58,10 +58,8 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      // Is it OK? Or do I have to use something else to put my users? It works, although...
       return action.payload;
     });
-    // .addCase(deleteProductAPI.fulfilled, (state, action) => {});
   },
 });
 

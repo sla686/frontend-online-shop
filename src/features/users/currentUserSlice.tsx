@@ -19,8 +19,6 @@ export const login = createAsyncThunk(
         }
       );
       if (response.data.access_token) {
-        // we need to save our access token in local storage!!
-        // localStorage.setItem("access_token", response.data.access_token);
         const getUser = await axios.get(
           "https://api.escuelajs.co/api/v1/auth/profile",
           {
@@ -39,26 +37,26 @@ export const login = createAsyncThunk(
   }
 );
 
-export const loginByToken = createAsyncThunk(
-  "loginByToken",
-  async (token: string) => {
-    try {
-      // localStorage.setItem("access_token", token);
-      const getUser = await axios.get(
-        "https://api.escuelajs.co/api/v1/auth/profile",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return getUser.data;
-    } catch (err) {
-      localStorage.removeItem("current_user");
-      console.log(err);
-    }
-  }
-);
+// export const loginByToken = createAsyncThunk(
+//   "loginByToken",
+//   async (token: string) => {
+//     try {
+//       // localStorage.setItem("access_token", token);
+//       const getUser = await axios.get(
+//         "https://api.escuelajs.co/api/v1/auth/profile",
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+//       return getUser.data;
+//     } catch (err) {
+//       localStorage.removeItem("current_user");
+//       console.log(err);
+//     }
+//   }
+// );
 
 const currentUserSlice = createSlice({
   name: "currentUser",
@@ -69,13 +67,9 @@ const currentUserSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(login.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
-      })
-      .addCase(loginByToken.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
-      });
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.currentUser = action.payload;
+    });
   },
 });
 

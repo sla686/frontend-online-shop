@@ -8,6 +8,8 @@ import {
 } from "../features/cart/cartSlice";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +52,7 @@ const Cart = () => {
                   {item.title}
                 </h5>
                 <div>
-                  <p>Price:</p>
+                  <LocalOfferIcon fontSize="large" />
                   <p>{item.price}$</p>
                 </div>
                 <div className="cart__quantity">
@@ -74,12 +76,16 @@ const Cart = () => {
                   </div>
                 </div>
                 <div>
-                  <p>Total price:</p>
+                  <p>Total:</p>
                   <p>{item.price * item.quantity}$</p>
                 </div>
-                <button onClick={() => onDelete(item.id)}>
-                  Remove from Сart
-                </button>
+                <IconButton
+                  aria-label="remove the item from the cart"
+                  onClick={() => onDelete(item.id)}
+                  size="large"
+                >
+                  <RemoveShoppingCartIcon fontSize="large" />
+                </IconButton>
               </div>
             ))}
             <div>
@@ -94,7 +100,10 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <div>Your cart is empty!</div>
+        <div>
+          <h2>Your cart is empty!</h2>
+          <h2>Start shopping at the products page!</h2>
+        </div>
       )}
     </div>
   );

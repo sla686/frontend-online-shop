@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -121,9 +123,21 @@ const Product = () => {
               <p>{item.price}$</p>
             </div>
             <div>
-              <button onClick={() => onAdd(item.id)}>Add to Сart</button>
+              <IconButton
+                aria-label="add to cart"
+                onClick={() => onAdd(item.id)}
+                size="large"
+              >
+                <AddShoppingCartIcon fontSize="large" />
+              </IconButton>
               {admin && (
-                <button onClick={() => onDelete(item.id)}>Remove item</button>
+                <IconButton
+                  aria-label="delete product"
+                  onClick={() => onDelete(item.id)}
+                  size="large"
+                >
+                  <DeleteForeverIcon fontSize="large" />
+                </IconButton>
               )}
             </div>
           </div>

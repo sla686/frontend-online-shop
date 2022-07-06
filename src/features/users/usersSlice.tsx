@@ -1,14 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { UserReducerState, User, LoginType } from "../../types/user";
-
-// interface UserState {
-//   id: number;
-//   username: string;
-//   password: string;
-//   isAdmin: boolean;
-// }
+import { User } from "../../types/user";
 
 // const initialState: Array<UserState> = [
 //   { id: 0, username: "tije", password: "123", isAdmin: true },
@@ -60,6 +53,27 @@ export const createUser = createAsyncThunk(
   }
 );
 
+export const updateUserAPI = createAsyncThunk(
+  "updateUserAPI",
+  async ({ id, name, role, email, password, avatar }: User) => {
+    try {
+      const update = await axios.put(
+        `https://api.escuelajs.co/api/v1/users/${id}`,
+        {
+          name: name,
+          role: role,
+          email: email,
+          password: password,
+          avatar: avatar,
+        }
+      );
+      return update.data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -75,6 +89,10 @@ const usersSlice = createSlice({
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.userList.push(action.payload);
+      })
+      .addCase(updateUserAPI.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.userList.push({ ...state.userList, ...action.payload });
       });
   },
 });

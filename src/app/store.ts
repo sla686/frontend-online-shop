@@ -4,6 +4,7 @@ import usersReducer from "../features/users/usersSlice";
 import currentUserReducer from "../features/users/currentUserSlice";
 import productsReducer from "../features/products/productsSlice";
 import cartReducer from "../features/cart/cartSlice";
+import categoriesReducer from "../features/categories/categoriesSlice";
 
 import { User } from "../types/user";
 import { Cart } from "../types/products";
@@ -45,6 +46,7 @@ export const store = configureStore({
     users: usersReducer,
     products: productsReducer,
     cart: cartReducer,
+    categories: categoriesReducer,
   },
   preloadedState: preloadedState,
 });
