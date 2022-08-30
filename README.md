@@ -1,26 +1,41 @@
-# Front-end Project
+<div align="center">
 
-## Student's notes
+# Online Shop
 
-I will try to complete this project later on during the Integrify program. For now I have done everything I could and I don't have enough time to complete it by now!
+<img align="center" alt="Online Shop Screenshot" src="./OnlineShop.png" />
 
-## Requirements
+'Online Shop' is a frontend project written with TypeScript, Material-UI, React and Redux. This is one of my frontend projects I have ever done!
+The purpose of this project was to learn about building a frontend web application. I have also improved my skills with Material-UI, React and Redux.
 
-1. TypeScript and Unit testing are required in your project
-2. Use the API endpoint [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/). Read the documentation and learn how to use the different endpoints.
-3. Create at least 4 pages (can be more if you want): Home page, product page,
-   profile page (only available if user logins), and cart page (cart could be a page or a modal)
-4. Use context API to create a button to switch themes of the web app
-5. Create Redux store for following features:
+[About](#about) •
+[Demo](#demo) •
+[Installation](#installation) •
+[Author](#author) •
+[License](#license)
 
-- product reducer: get all products, find a single products, sort products by
-  categories, sort products by price, update and delete a product (enable update & delete features only for admin of the webapp. For example, you can check if user is your account before let them delete product)
-- user reducer: get all users, find a single user, create new user (delete user is not allowed in this api)
-- cart reducer: add product to cart, remove products, update products's quantity in cart
+</div>
 
-6. Your UI should have functions according to the Redux store
+## About
 
-## Instruction to start the project
+The project consists of:
+
+- React.js (17+)
+- React Router (6+)
+- Redux (toolkit)
+- Material-UI (5+)
+
+Redux store has the following features:
+
+- Product reducer: get all products, find a single products, update and delete a product (enabled only for the admin)
+- User reducer: get all users, find a single user, create new user
+- Cart reducer: add product to cart, remove products, update products's quantity in cart
+
+## Demo
+
+- Frontend: [Online Shop](https://online-store-project-sla686.netlify.app/) - (Test User profile: test@user.com / testuser)
+- API endpoint used: [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
+
+## Installation
 
 In the project directory, you can run:
 
@@ -44,3 +59,12 @@ Launches the test runner in the interactive watch mode
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+## Author
+
+- LinkedIn: [Viacheslav Semushin](https://www.linkedin.com/in/viacheslav-semushin/)
+- Github: [@sla686](https://github.com/sla686)
+
+## License
+
+Copyright © 2022 [@sla686](https://github.com/sla686) </br>
