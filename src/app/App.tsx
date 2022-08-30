@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, useMemo } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material";
-// import { deepOrange, grey, orange, yellow } from "@mui/material/colors";
+import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { yellow, blue } from "@mui/material/colors";
 
 import "../styles/style.scss";
 import { useAppDispatch, useAppSelector } from "./hooks";
@@ -69,6 +69,8 @@ function App() {
     () =>
       createTheme({
         palette: {
+          primary: blue,
+          secondary: yellow,
           mode,
         },
       }),
@@ -79,39 +81,42 @@ function App() {
     <div className="App">
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
-          <Routes>
-            <Route
-              path="/"
-              element={<Navigation colorModeContext={ColorModeContext} />}
-            >
-              <Route index element={<HomePage />} />
-              <Route path="products">
-                <Route index element={<Products />} />
-                <Route path=":productId" element={<SingleProduct />} />
-              </Route>
-              <Route path="users">
+          <CssBaseline />
+          <Box>
+            <Routes>
+              <Route
+                path="/"
+                element={<Navigation colorModeContext={ColorModeContext} />}
+              >
+                <Route index element={<HomePage />} />
+                <Route path="products">
+                  <Route index element={<Products />} />
+                  <Route path=":productId" element={<SingleProduct />} />
+                </Route>
+                <Route path="users">
+                  <Route
+                    path=":userId"
+                    element={
+                      <RequireAuth authenticated={auth}>
+                        <SingleUser />
+                      </RequireAuth>
+                    }
+                  />
+                </Route>
                 <Route
-                  path=":userId"
+                  path="profile"
                   element={
                     <RequireAuth authenticated={auth}>
-                      <SingleUser />
+                      <Profile />
                     </RequireAuth>
                   }
                 />
+                <Route path="login" element={<Login />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="*" element={<Navigate to="/" />} />
               </Route>
-              <Route
-                path="profile"
-                element={
-                  <RequireAuth authenticated={auth}>
-                    <Profile />
-                  </RequireAuth>
-                }
-              />
-              <Route path="login" element={<Login />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Route>
-          </Routes>
+            </Routes>
+          </Box>
         </ThemeProvider>
       </ColorModeContext.Provider>
     </div>
