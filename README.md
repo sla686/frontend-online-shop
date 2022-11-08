@@ -32,7 +32,7 @@ Redux store has the following features:
 
 ## Demo
 
-- Frontend: [Online Shop](https://online-store-project-sla686.netlify.app/) - (Test User profile: test@user.com / testuser)
+- Frontend: [Online Shop](https://online-store-project-sla686.netlify.app/) - (Admin profile: admin@mail.com / admin123)
 - API endpoint used: [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/)
 
 ## Installation
