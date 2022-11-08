@@ -7,6 +7,9 @@
 'Online Shop' is a frontend project written with TypeScript, Material-UI, React and Redux. This is one of my frontend projects I have ever done!
 The purpose of this project was to learn about building a frontend web application. I have also improved my skills with Material-UI, React and Redux.
 
+[![Node.js CI](https://github.com/sla686/frontend-online-shop/actions/workflows/node.js.yml/badge.svg)](https://github.com/sla686/frontend-online-shop/actions/workflows/node.js.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 [About](#about) •
 [Demo](#demo) •
 [Installation](#installation) •
